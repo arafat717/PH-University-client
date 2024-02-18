@@ -1,26 +1,30 @@
 import { Button } from "antd";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useLoginMutation } from "../redux/feature/auth/authApi";
+import { useAppDispatch } from "../redux/feature/hooks";
+import { setUser } from "../redux/feature/auth/AuthSlice";
+import { VarifayToken } from "../utils/VarifayToken";
 
 const Login = () => {
+  const dispatch = useAppDispatch();
   const { register, handleSubmit } = useForm({
     defaultValues: {
       id: "A-0001",
       password: "admin123",
     },
   });
-  const [login, { data, error }] = useLoginMutation();
-  console.log(data);
-  console.log(error);
+  const [login, { error }] = useLoginMutation();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const userInfo = {
       id: data.id,
       password: data.password,
     };
-    console.log(data);
-    login(userInfo);
+
+    const res = await login(userInfo).unwrap();
+    const user = VarifayToken(res.data.accessToken);
+    console.log(user);
+    dispatch(setUser({ user: user, token: res.data.accessToken }));
   };
 
   return (
