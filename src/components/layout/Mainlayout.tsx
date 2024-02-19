@@ -1,40 +1,27 @@
-import { Layout } from "antd";
+import { Button, Layout } from "antd";
 import { Outlet } from "react-router-dom";
 import SideBar from "./SideBar";
+import { useAppDispatch } from "../../redux/feature/hooks";
+import { logout } from "../../redux/feature/auth/AuthSlice";
+import { toast } from "sonner";
 
 const { Header, Content } = Layout;
 
-// const items: MenuProps["items"] = [
-//   {
-//     key: "dashboad",
-//     label: <NavLink to="/admin/dashboad">Dashboad</NavLink>,
-//   },
-//   {
-//     key: "User Management",
-//     label: "User Management",
-//     children: [
-//       {
-//         key: "createAdmin",
-//         label: <NavLink to="/admin/create-admin">Create Admin</NavLink>,
-//       },
-//       {
-//         key: "createFaculty",
-//         label: <NavLink to="/admin/create-faculty">Create Faculty</NavLink>,
-//       },
-//       {
-//         key: "createStudent",
-//         label: <NavLink to="/admin/create-student">Create Student</NavLink>,
-//       },
-//     ],
-//   },
-// ];
-
 const Mainlayout = () => {
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    toast.success("LoggOut Successfully");
+  };
+
   return (
     <Layout style={{ height: "100vh" }}>
       <SideBar></SideBar>
       <Layout>
-        <Header style={{ padding: 0 }} />
+        <Header>
+          <Button onClick={handleLogout}>LogOut</Button>
+        </Header>
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             style={{

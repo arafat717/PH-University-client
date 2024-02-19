@@ -3,6 +3,7 @@ import AdminDasboad from "../pages/admin/AdminDasboad";
 import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFaculty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
+import AcadamicSemester from "../pages/admin/acadamicSemester/AcadamicSemester";
 
 export type TRoute = {
   path: string;
@@ -20,6 +21,16 @@ export const adminpaths = [
     name: "Dashboad",
     path: "dashboad",
     element: <AdminDasboad></AdminDasboad>,
+  },
+  {
+    name: "Acadamic Management",
+    children: [
+      {
+        name: "Acadamic Semester",
+        path: "academic-semesters",
+        element: <AcadamicSemester></AcadamicSemester>,
+      },
+    ],
   },
   {
     name: "User Management",
