@@ -1,20 +1,29 @@
 import { ReactNode } from "react";
 import AdminDasboad from "../pages/admin/AdminDasboad";
-import CreateAdmin from "../pages/admin/CreateAdmin";
-import CreateFaculty from "../pages/admin/CreateFaculty";
-import CreateStudent from "../pages/admin/CreateStudent";
+import CreateAdmin from "../pages/admin/userManagement/CreateAdmin";
+import CreateFaculty from "../pages/admin/userManagement/CreateFaculty";
+import CreateStudent from "../pages/admin/userManagement/CreateStudent";
 import AcadamicSemester from "../pages/admin/acadamicSemester/AcadamicSemester";
+import CreateAcadamicSemester from "../pages/admin/acadamicSemester/CreateAcadamicSemester";
+import CreateAcadamicFaculty from "../pages/admin/AcadamicFaculty/CreateAcadamicFaculty";
+import AcadamicFaculty from "../pages/admin/AcadamicFaculty/AcadamicFaculty";
+import AcadamicDepartment from "../pages/admin/AcadamicDepartment/AcadamicDepartment";
+import CreateAcadamicDepartment from "../pages/admin/AcadamicDepartment/CreateAcadamicDepartment";
+import StudentData from "../pages/admin/userManagement/StudentData";
+import StudentDetails from "../pages/admin/userManagement/StudentDetails";
 
 export type TRoute = {
   path: string;
   element: ReactNode;
 };
 
-export type TSidebarItem = {
-  key: string;
-  label: ReactNode;
-  children?: TSidebarItem[];
-};
+export type TSidebarItem =
+  | {
+      key: string;
+      label: ReactNode;
+      children?: TSidebarItem[];
+    }
+  | undefined;
 
 export const adminpaths = [
   {
@@ -26,15 +35,54 @@ export const adminpaths = [
     name: "Acadamic Management",
     children: [
       {
+        name: "Create A. Semester",
+        path: "create-academic-semesters",
+        element: <CreateAcadamicSemester></CreateAcadamicSemester>,
+      },
+      {
         name: "Acadamic Semester",
         path: "academic-semesters",
         element: <AcadamicSemester></AcadamicSemester>,
+      },
+      {
+        name: "Create A. Faculty",
+        path: "create-academic-faculty",
+        element: <CreateAcadamicFaculty></CreateAcadamicFaculty>,
+      },
+      {
+        name: "Acadamic Faculty",
+        path: "academic-faculty",
+        element: <AcadamicFaculty></AcadamicFaculty>,
+      },
+      {
+        name: "Create A. Department",
+        path: "create-academic-department",
+        element: <CreateAcadamicDepartment></CreateAcadamicDepartment>,
+      },
+      {
+        name: "Acadamic Department",
+        path: "academic-department",
+        element: <AcadamicDepartment></AcadamicDepartment>,
       },
     ],
   },
   {
     name: "User Management",
     children: [
+      {
+        name: "Create Student",
+        path: "create-student",
+        element: <CreateStudent></CreateStudent>,
+      },
+      {
+        name: "Student Data",
+        path: "students",
+        element: <StudentData></StudentData>,
+      },
+      {
+        path: "students-details/:studentId",
+        element: <StudentDetails></StudentDetails>,
+      },
       {
         name: "Create Admin",
         path: "create-admin",
@@ -44,11 +92,6 @@ export const adminpaths = [
         name: "Create Faculty",
         path: "create-faculty",
         element: <CreateFaculty></CreateFaculty>,
-      },
-      {
-        name: "Create Student",
-        path: "create-student",
-        element: <CreateStudent></CreateStudent>,
       },
     ],
   },
