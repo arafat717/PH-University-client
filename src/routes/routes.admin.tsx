@@ -11,6 +11,12 @@ import AcadamicDepartment from "../pages/admin/AcadamicDepartment/AcadamicDepart
 import CreateAcadamicDepartment from "../pages/admin/AcadamicDepartment/CreateAcadamicDepartment";
 import StudentData from "../pages/admin/userManagement/StudentData";
 import StudentDetails from "../pages/admin/userManagement/StudentDetails";
+import SemesterRagistration from "../pages/admin/CourseManagement/SemesterRagistration";
+import RegisterdSemester from "../pages/admin/CourseManagement/RegisterdSemester";
+import CreateCourse from "../pages/admin/CourseManagement/CreateCourse";
+import Course from "../pages/admin/CourseManagement/Course";
+import OfferCourse from "../pages/admin/CourseManagement/OfferCourse";
+import OfferedCourse from "../pages/faculty/OfferedCourse";
 
 export type TRoute = {
   path: string;
@@ -66,6 +72,7 @@ export const adminpaths = [
       },
     ],
   },
+
   {
     name: "User Management",
     children: [
@@ -92,6 +99,41 @@ export const adminpaths = [
         name: "Create Faculty",
         path: "create-faculty",
         element: <CreateFaculty></CreateFaculty>,
+      },
+    ],
+  },
+  {
+    name: "Course Management",
+    children: [
+      {
+        name: "Semester Registration",
+        path: "semester-registration",
+        element: <SemesterRagistration></SemesterRagistration>,
+      },
+      {
+        name: "Registered Semester",
+        path: "registerd-semesters",
+        element: <RegisterdSemester></RegisterdSemester>,
+      },
+      {
+        name: "Create Course",
+        path: "create-course",
+        element: <CreateCourse></CreateCourse>,
+      },
+      {
+        name: "Courses",
+        path: "courses",
+        element: <Course></Course>,
+      },
+      {
+        name: "Offer Course",
+        path: "offer-course",
+        element: <OfferCourse></OfferCourse>,
+      },
+      {
+        name: "Offered Courses",
+        path: "offered-courses",
+        element: <OfferedCourse></OfferedCourse>,
       },
     ],
   },
