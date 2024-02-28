@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import AdminDasboad from "../pages/admin/AdminDasboad";
 import CreateAdmin from "../pages/admin/userManagement/CreateAdmin";
 import CreateFaculty from "../pages/admin/userManagement/CreateFaculty";
@@ -17,19 +16,6 @@ import CreateCourse from "../pages/admin/CourseManagement/CreateCourse";
 import Course from "../pages/admin/CourseManagement/Course";
 import OfferCourse from "../pages/admin/CourseManagement/OfferCourse";
 import OfferedCourse from "../pages/faculty/OfferedCourse";
-
-export type TRoute = {
-  path: string;
-  element: ReactNode;
-};
-
-export type TSidebarItem =
-  | {
-      key: string;
-      label: ReactNode;
-      children?: TSidebarItem[];
-    }
-  | undefined;
 
 export const adminpaths = [
   {

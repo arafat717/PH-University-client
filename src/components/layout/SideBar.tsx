@@ -1,10 +1,12 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Layout, Menu } from "antd";
 import { sidebarPathGenarator } from "../../utils/sidebarPathGenarator";
 import { adminpaths } from "../../routes/routes.admin";
 import { facultyPaths } from "../../routes/faculty.routes";
 import { studentPaths } from "../../routes/student.routes";
-import { selectCurrentUser } from "../../redux/feature/auth/AuthSlice";
+import { TUser, useCurrentToken } from "../../redux/feature/auth/AuthSlice";
 import { useAppSelector } from "../../redux/feature/hooks";
+import { VarifayToken } from "../../utils/VarifayToken";
 
 const { Sider } = Layout;
 
@@ -15,19 +17,25 @@ const userRole = {
 };
 
 const sidebar = () => {
-  const user = useAppSelector(selectCurrentUser);
-  let sidebaritems;
-  console.log(user);
+  const token = useAppSelector(useCurrentToken);
 
-  switch (user!.role) {
+  let user;
+
+  if (token) {
+    user = VarifayToken(token);
+  }
+  // console.log(user);
+  let sidebarItems;
+
+  switch ((user as TUser)!.role) {
     case userRole.ADMIN:
-      sidebaritems = sidebarPathGenarator(adminpaths, userRole.ADMIN);
+      sidebarItems = sidebarPathGenarator(adminpaths, userRole.ADMIN);
       break;
     case userRole.FACULTY:
-      sidebaritems = sidebarPathGenarator(facultyPaths, userRole.FACULTY);
+      sidebarItems = sidebarPathGenarator(facultyPaths, userRole.FACULTY);
       break;
     case userRole.STUDENT:
-      sidebaritems = sidebarPathGenarator(studentPaths, userRole.STUDENT);
+      sidebarItems = sidebarPathGenarator(studentPaths, userRole.STUDENT);
       break;
 
     default:
@@ -56,7 +64,7 @@ const sidebar = () => {
         theme="dark"
         mode="inline"
         defaultSelectedKeys={["4"]}
-        items={sidebaritems}
+        items={sidebarItems}
       />
     </Sider>
   );
